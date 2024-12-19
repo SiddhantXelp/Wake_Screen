@@ -72,3 +72,14 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# React Native specific
+node_modules/
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/build/
+*.log
+*.lock
+*.env
+.DS_Store
