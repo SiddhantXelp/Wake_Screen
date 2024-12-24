@@ -6,6 +6,7 @@ import android.view.WindowManager
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
+import android.media.MediaPlayer
 
 class WakeScreenModule(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
@@ -34,6 +35,13 @@ class WakeScreenModule(reactContext: ReactApplicationContext) :
                             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
                 )
             }
+
+                    // Play custom sound
+        val mediaPlayer = MediaPlayer.create(activity, R.raw.wake_up_sound)
+        mediaPlayer.start()
+        mediaPlayer.setOnCompletionListener {
+            mediaPlayer.release() // Release resources after playback
+        }
             wakeLock.release()
         }
     }

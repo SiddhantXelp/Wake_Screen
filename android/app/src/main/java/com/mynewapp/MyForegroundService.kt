@@ -7,6 +7,7 @@ import android.os.PowerManager
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import android.media.MediaPlayer
 
 class MyForegroundService : FirebaseMessagingService() {
 
@@ -29,6 +30,15 @@ class MyForegroundService : FirebaseMessagingService() {
             "MyApp::WakeLock"
         )
         wakeLock.acquire(5000) // Wake the screen for 3 seconds
-        wakeLock.release()
+        
+         // Play custom sound
+        val mediaPlayer = MediaPlayer.create(this, R.raw.wake_up_sound)
+        mediaPlayer.start()
+        mediaPlayer.setOnCompletionListener {
+            mediaPlayer.release() // Release resources after playback
+        }
+        
+    wakeLock.release()
+
     }
 }
